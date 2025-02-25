@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -19,7 +20,7 @@ public class Main {
         printStudent.accept("Олександр");
 
 
-        System.out.println("2.");
+        System.out.println("2.(індивідуальне 1");
         //Допишіть спосіб 1
         Function<Integer, String> task2 = new Function<Integer, String>() {
             @Override
@@ -70,7 +71,42 @@ public class Main {
         //Спосіб 2
         BiFunction<Double, Double, Double> finalGrade = (coursework, exam) -> coursework * 0.4 + exam * 0.6;
         System.out.println(finalGrade.apply(80.0, 90.0));
-        
+
+
+        System.out.println("Індивідуальне 2");
+        Predicate<Integer> degreeM = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                if (integer==5) return true;
+                else return false;
+            }
+        };
+        System.out.println("Чи навчається студент на магістратурі?"+degreeM.test(4));
+
+        Predicate<Integer> degree = grade ->{
+            if (grade==5) return true;
+            else return false;
+        };
+        System.out.println("Чи навчається студент на магістратурі?"+degree.test(5));
+
+
+
+        System.out.println("Індивідуальне 3+");
+        List<Student> students = List.of(
+                new Student("Mariia", 88),
+                new Student("Vika", 20),
+                new Student("Anastasiia", 77)
+        );
+        Predicate<Student> task31 = student -> student.getGrade()>=60;
+
+        Function<Student, String> studentToName = Student::getName;
+
+
+        List<String> b = students.stream().
+                filter(task31).
+                map(studentToName).
+                toList();
+        System.out.println(b);
 
 
 
